@@ -4,19 +4,21 @@
     <div class="add-new-item">
       <input type="text" v-model="newTodoText" v-on:keyup.enter="add" placeholder="加入一個新工作" class="new-item" />
     </div>
-    <ul class="todo-list" v-if="!(incompleteCount === 0 && filter === 'show_all')">
+<!--     <ul class="todo-list" v-if="!(incompleteCount === 0 && filter === 'show_all')"> -->
+    <ul class="todo-list">
       <todo-item v-for="(todo, key, index) in list" :key="todo.uuid" :todo="todo" :index="key" :filter="filter" class="todo-item" v-on:remove="del(key)"></todo-item>
     </ul>
-    <div class="msg" v-if="incompleteCount === 0 && filter === 'show_all'">恭喜完成所有的項目！</div>
-    <div class="control">
+    <!-- <div class="msg" v-if="incompleteCount === 0 && filter === 'show_all'">恭喜完成所有的項目！</div> -->
+<!--     <div class="control">
       <a v-on:click="setFilter('show_all')" class="btn" :class="{ active: filter === 'show_all'}">全部 ({{ allCount }})</a>
       <a v-on:click="setFilter('show_completed')" class="btn" :class="{ active: filter === 'show_completed'}">已完成 ({{ completedCount }})</a>
       <a v-on:click="setFilter('show_incomplete')" class="btn" :class="{ active: filter === 'show_incomplete'}">未完成 ({{ incompleteCount }})</a>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 import Vue from 'vue';
+import { mapGetters, mapActions } from 'vuex';
 
 Vue.component( 'todo-item' , {
   props: ['todo', 'index', 'filter'],
@@ -77,79 +79,32 @@ export default {
       filter: 'show_all'
     }
   },
-  computed: {
-    list () {
-      if(this.filter === 'show_all') {
-        return this.todos;
-      } else if (this.filter === 'show_completed') {
-        return this._getTodos(true);
-      } else { //show_incomplete
-        return this._getTodos(false);
-      }
-    },
-    allCount () {
-      return Object.keys(this.todos).length;
-    },
-    completedCount () {
-      var _this = this;
+  computed: mapGetters({
+    list: 'getTodos',
+    // allCount () {
+    //   return Object.keys(this.todos).length;
+    // },
+    // completedCount () {
+    //   var _this = this;
 
-      return Object.keys(this.todos).filter(function(value) {
-        return _this.todos[value].isCompleted
-      }).length;
-    },
-    incompleteCount () {
-      var _this = this;
+    //   return Object.keys(this.todos).filter(function(value) {
+    //     return _this.todos[value].isCompleted
+    //   }).length;
+    // },
+    // incompleteCount () {
+    //   var _this = this;
 
-      return Object.keys(this.todos).filter(function(value) {
-        return !_this.todos[value].isCompleted
-      }).length;
-    }
-  },
+    //   return Object.keys(this.todos).filter(function(value) {
+    //     return !_this.todos[value].isCompleted
+    //   }).length;
+    // }
+  }),
   methods: {
-    add () {
-      var id = this._uuid();
-
-      Vue.set(this.todos, id, {
-        uuid: id,
-        text: this.newTodoText,
-        isCompleted: false,
-        isEdit: false
-      });
-
-      this.newTodoText = '';
-    },
-    del (index) {
-      Vue.delete(this.todos, index);
-    },
-    setFilter (filter) {
-      this.filter = filter;
-    },
-    _uuid () {
-      var d = Date.now();
-      if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
-          d += performance.now(); //use high-precision timer if available
-      }
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-          var r = (d + Math.random() * 16) % 16 | 0;
-          d = Math.floor(d / 16);
-          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-    },
-    _getTodos(isCompleted) {
-      var list = {};
-
-      for(var index in this.todos) {
-        if(this.todos[index].isCompleted === isCompleted) {
-          list[index] = this.todos[index];
-        }
-      }
-      return list;
-    },
-    _getObjContent(data) {
-      return  Object.keys(data).map(function(index){
-        return data[index];
-      });
-    }
+    ...mapActions([
+      'addTodo',
+      'deleteTodo',
+      'setFilter'
+    ])
   }
 }
 </script>
