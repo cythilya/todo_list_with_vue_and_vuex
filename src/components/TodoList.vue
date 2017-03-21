@@ -1,119 +1,55 @@
 <template>
-  <div>
-    <h1>Todo List with Vue.js and Vuex</h1>
+  <div class="todos">
+    <h1 class="todo-heading">Todo List with Vue.js and Vuex</h1>
     <div class="add-new-item">
-      <input type="text" v-model="newTodoText" v-on:keyup.enter="add" placeholder="加入一個新工作" class="new-item" />
+      <input type="text" class="new-item" placeholder="加入一個新工作" @keyup.enter="addTodo(newTodoText)" v-model="newTodoText" />
     </div>
-<!--     <ul class="todo-list" v-if="!(incompleteCount === 0 && filter === 'show_all')"> -->
-    <ul class="todo-list">
-      <todo-item v-for="(todo, key, index) in list" :key="todo.uuid" :todo="todo" :index="key" :filter="filter" class="todo-item" v-on:remove="del(key)"></todo-item>
+    <ul class="todo-list" v-if="!(incompleteCount === 0 && filter === 'show_all')">
+      <li class="todo-item" v-for="(todo, index) in list">
+        <input type="checkbox" @change="updateStatus(todo)" :checked="todo.isCompleted">
+        <label v-if="!todo.isEdit" v-bind:class="[todo.isCompleted ? 'completed' : '']">{{ todo.text }}</label>
+        <input type="text" v-if="todo.isEdit" @keyup.enter="updateTodo(todo)" v-model="todo.text" />
+        <a @click="editTodo(todo)" v-if="!todo.isEdit" class="btn">編輯</a>
+        <a @click="deleteTodo(index)" class="btn">刪除</a>
+      </li>
     </ul>
-    <!-- <div class="msg" v-if="incompleteCount === 0 && filter === 'show_all'">恭喜完成所有的項目！</div> -->
-<!--     <div class="control">
-      <a v-on:click="setFilter('show_all')" class="btn" :class="{ active: filter === 'show_all'}">全部 ({{ allCount }})</a>
-      <a v-on:click="setFilter('show_completed')" class="btn" :class="{ active: filter === 'show_completed'}">已完成 ({{ completedCount }})</a>
-      <a v-on:click="setFilter('show_incomplete')" class="btn" :class="{ active: filter === 'show_incomplete'}">未完成 ({{ incompleteCount }})</a>
-    </div> -->
+    <div class="msg" v-if="incompleteCount === 0 && filter === 'show_all'">恭喜完成所有的項目！</div>
+    <div class="control">
+      <a class="btn" @click="setFilter('show_all')" :class="{ active: filter === 'show_all'}">全部 ({{ allCount }})</a>
+      <a class="btn" @click="setFilter('show_completed')" :class="{ active: filter === 'show_completed'}">已完成 ({{ completedCount }})</a>
+      <a class="btn" @click="setFilter('show_incomplete')" :class="{ active: filter === 'show_incomplete'}">未完成 ({{ incompleteCount }})</a>
+    </div>
   </div>
 </template>
+
 <script>
 import Vue from 'vue';
-import { mapGetters, mapActions } from 'vuex';
+import Vuex from 'vuex';
 
-Vue.component( 'todo-item' , {
-  props: ['todo', 'index', 'filter'],
-  template:`<li>
-    <input type="checkbox" :id="todo.uuid" v-on:change="updateStatus(todo)" :checked="todo.isCompleted">
-    <label :for="todo.uuid" v-if="!todo.isEdit" v-bind:class="[todo.isCompleted ? 'completed' : '']">{{ todo.text }}</label>
-    <input type="text" v-if="todo.isEdit" v-on:keyup.enter="updateTodo($event, todo)" v-model="todo.text" />
-    <a v-on:click="editTodo(todo)" v-if="!todo.isEdit" class="btn">編輯</a>
-    <a v-on:click="remove(index)" class="btn">刪除</a>
-  </li>`,
-  methods: {
-    remove(index) {
-      this.$emit('remove');
-    },
-    updateTodo($event, todo) {
-      if($event.target.value) {
-        todo.text = $event.target.value;
-      }
-      todo.isEdit = !todo.isEdit;
-    },
-    updateStatus(todo) {
-      todo.isCompleted = !todo.isCompleted;
-    },
-    editTodo(todo) {
-      todo.isEdit = !todo.isEdit;
-    },
-    showCompletedTodo(isCompleted, filter) {
-      return !(!isCompleted && filter === 'show_completed');
-    }
-  }
-});
-
-export default {
-  name: 'TodoList',
-  data () {
+export default Vue.extend({
+  data: function() {
     return {
-      todos: {
-        "a5436691-350c-4ed0-862e-c8abc8509a4a": {
-          "uuid": "a5436691-350c-4ed0-862e-c8abc8509a4a",
-          "text": "買一本好書",
-          "isCompleted": false,
-          "isEdit": false
-        },
-        "a98bf666-a710-43b2-81b2-60c68ec4688d": {
-          "uuid": "a98bf666-a710-43b2-81b2-60c68ec4688d",
-          "text": "打電話給小明",
-          "isCompleted": true,
-          "isEdit": false
-        },
-        "452ef417-033d-48ff-9fec-9d686c105dce": {
-          "uuid": "452ef417-033d-48ff-9fec-9d686c105dce",
-          "text": "寫一篇文章",
-          "isCompleted": false,
-          "isEdit": false
-        }
-      },
-      newTodoText: '',
-      filter: 'show_all'
+      newTodoText: ''
     }
   },
-  computed: mapGetters({
+  computed: Vuex.mapGetters({
     list: 'getTodos',
-    // allCount () {
-    //   return Object.keys(this.todos).length;
-    // },
-    // completedCount () {
-    //   var _this = this;
-
-    //   return Object.keys(this.todos).filter(function(value) {
-    //     return _this.todos[value].isCompleted
-    //   }).length;
-    // },
-    // incompleteCount () {
-    //   var _this = this;
-
-    //   return Object.keys(this.todos).filter(function(value) {
-    //     return !_this.todos[value].isCompleted
-    //   }).length;
-    // }
+    filter: 'getFilter',
+    allCount: 'getAllCount',
+    completedCount: 'getCompletedCount',
+    incompleteCount: 'getIncompleteCount'
   }),
-  methods: {
-    ...mapActions([
-      'addTodo',
-      'deleteTodo',
-      'setFilter'
-    ])
-  }
-}
+  methods: Vuex.mapActions({
+    addTodo: 'addTodo',
+    deleteTodo: 'deleteTodo',
+    updateTodo: 'updateTodo',
+    editTodo: 'editTodo',
+    updateStatus: 'updateStatus',
+    setFilter: 'setFilter'
+  })
+})
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,select,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,button,caption,cite,code,dfn,em,input,optgroup,option,select,strong,textarea,th,var{font:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:baseline}sub{vertical-align:baseline}legend{color:#000}
 
-.clearfix{zoom:1;}
-.clearfix:after{content:'.';display:block;clear:both;visibility:hidden;height:0;font-size:0;}
-
-html{background:#41d2f2;font-family:'微軟正黑體',sans-serif}.todos{background:#fff;border-radius:10px;width:600px;margin:15px auto;padding:15px}.todo-heading{font-size:30px;margin:0 0 15px 0}.add-new-item{margin:0 0 15px 0;font-size:15px}.todo-list{font-size:15px;color:#525252}.todo-item{margin:0 0 15px 0}.msg{margin:0 0 15px 0;font-size:15px;color:#525252}.btn{border:1px solid #ccc;border-radius:10px;cursor:pointer;display:inline-block;margin:0 5px;padding:5px 10px;min-width:30px;text-align:center}.btn.active,.btn:hover{background:#ccc;color:#fff}.control{border-top:1px solid #ddd;color:#525252;font-size:15px;padding:15px 0 0 0}.mb{margin:0 0 15px 0}.completed{text-decoration:line-through}input[type=text]{border:1px solid #ddd;border-radius:10px;color:#525252;line-height:1.2;height:22px;padding:5px}
+<style scoped lang="scss">
+  @import "../assets/css/todo_list.scss";
 </style>

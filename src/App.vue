@@ -1,23 +1,42 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!-- <h1>{{ msg }}</h1> -->
+    <!-- <router-link :to="{path: '/TodoList'}">Todo List with Vue.js and Vuex</router-link> -->
     <router-view></router-view>
+  <b-alert show>
+    Default Alert
+  </b-alert>
   </div>
+
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data: function() {
+    return {
+      dismissCountDown: null,
+      showDismissibleAlert: false,
+      msg: 'Todo List with Vue.js and Vuex'
+    }
+  },
+ methods: {
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = 5;
+    }
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "./assets/css/reset-font-min.css";
+@import "./assets/css/clearfix.css";
+
+html {
+  background: #41D2F2;
+  font-family: '微軟正黑體', sans-serif;
 }
 </style>

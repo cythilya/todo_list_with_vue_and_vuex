@@ -23,40 +23,49 @@ export const state = {
       "isEdit": false
     }
   },
-  newTodoText: '',
   filter: 'show_all'
 }
 
 // mutations
 export const mutations = {
-  [types.ADDTODO] (state) {
+  [types.ADDTODO](state, newTodoText) {
     var id = _uuid();
+
+    function _uuid () {
+      var d = Date.now();
+      if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+        d += performance.now(); //use high-precision timer if available
+      }
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+    }
 
     Vue.set(state.todos, id, {
       uuid: id,
-      text: state.newTodoText,
+      text: newTodoText,
       isCompleted: false,
       isEdit: false
     });
-
-    state.newTodoText = '';
   },
-  [types.DELETETODO] (state, index) {
+  [types.DELETETODO](state, index) {
     Vue.delete(state.todos, index);
+  },
+  [types.UPDATETODO](state, todo) {
+    if(todo.text) {
+      state.todos[todo.uuid].text = todo.text;
+    }
+    state.todos[todo.uuid].isEdit = false;
+  },
+  [types.EDITTODO](state, todo){
+  	state.todos[todo.uuid].isEdit = true;
+  },
+  [types.UPDATESTATUS](state, todo) {
+  	state.todos[todo.uuid].isCompleted = !todo.isCompleted;
   },
   [types.SETFILTER](state, filter) {
   	state.filter = filter;
   }
-}
-
-function _uuid () {
-  var d = Date.now();
-  if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
-    d += performance.now(); //use high-precision timer if available
-  }
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = (d + Math.random() * 16) % 16 | 0;
-    d = Math.floor(d / 16);
-    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-  });
 }

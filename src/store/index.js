@@ -4,7 +4,8 @@ import { state, mutations } from './mutations.js'
 import * as getters from './getters.js'
 import * as actions from './actions.js'
 
-Vue.use(Vuex);
+Vue.use( Vuex );
+
 
 export default new Vuex.Store({
   state,
