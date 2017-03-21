@@ -3,11 +3,7 @@
     <!-- <h1>{{ msg }}</h1> -->
     <!-- <router-link :to="{path: '/TodoList'}">Todo List with Vue.js and Vuex</router-link> -->
     <router-view></router-view>
-  <b-alert show>
-    Default Alert
-  </b-alert>
   </div>
-
 </template>
 
 <script>
