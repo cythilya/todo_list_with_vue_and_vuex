@@ -1,3 +1,8 @@
+.inactive {
+  background: #5cb85c;
+  color: #fff;
+}
+
 .todos {
   background: #fff;
   border-radius: 10px;
@@ -16,52 +21,15 @@
   font-size: 15px;
 }
 
-.todo-list {
-  font-size: 15px;
-  color: #525252;
-}
-
-.todo-item {
-  margin: 0 0 15px 0;
-}
-
-.msg {
-  margin: 0 0 15px 0;
-  font-size: 15px;
-  color: #525252;
-}
-
-.btn {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  cursor: pointer;
-  display: inline-block;
-  margin: 0px 5px;
-  padding: 5px 10px;
-  min-width: 30px;
-  text-align: center;
-  &:hover, &.active {
-    background: #ccc;
-    color: #fff;
-  }
-}
-
 .control {
-  border-top: 1px solid #ddd;
-  color: #525252;
-  font-size: 15px;
-  padding: 15px 0 0 0;
+  text-align: center;
 }
 
 .completed {
   text-decoration: line-through;
 }
 
-input[type=text] {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  color: #525252;
-  line-height: 1.2;
-  height: 22px;
-  padding: 5px;
+.custom-control {
+  min-height: 1em;
+  padding-left: 1rem;
 }

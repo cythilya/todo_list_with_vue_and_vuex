@@ -11,17 +11,7 @@ export default {
   name: 'app',
   data: function() {
     return {
-      dismissCountDown: null,
-      showDismissibleAlert: false,
-      msg: 'Todo List with Vue.js and Vuex'
-    }
-  },
- methods: {
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showAlert() {
-      this.dismissCountDown = 5;
+      msg: 'Todo List with Vue.js and Vuex',
     }
   }
 }
@@ -32,7 +22,6 @@ export default {
 @import "./assets/css/clearfix.css";
 
 html {
-  background: #41D2F2;
   font-family: '微軟正黑體', sans-serif;
 }
 </style>
