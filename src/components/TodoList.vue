@@ -17,13 +17,13 @@
     <br>
     <div class="control col">
       <b-button-group>
-        <b-button @click="setFilter('show_all')" :class="{'inactive': filter === 'show_all'}">全部
+        <b-button @click="setFilter('show_all')" :class="{'inactive': filter === 'show_all'}" size="sm">全部
           <b-badge>{{ allCount }}</b-badge>
         </b-button>
-        <b-button class="btn-secondary" @click="setFilter('show_completed')" :class="{'inactive': filter === 'show_completed'}">已完成
+        <b-button class="btn-secondary" @click="setFilter('show_completed')" :class="{'inactive': filter === 'show_completed'}" size="sm">已完成
           <b-badge>{{ completedCount }}</b-badge>
         </b-button>
-        <b-button class="btn-secondary" @click="setFilter('show_incomplete')" :class="{'inactive': filter === 'show_incomplete'}">未完成
+        <b-button class="btn-secondary" @click="setFilter('show_incomplete')" :class="{'inactive': filter === 'show_incomplete'}" size="sm">未完成
           <b-badge>{{ incompleteCount }}</b-badge>
         </b-button>
       </b-button-group>
