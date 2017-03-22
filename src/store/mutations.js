@@ -53,19 +53,17 @@ export const mutations = {
   [types.DELETETODO](state, index) {
     Vue.delete(state.todos, index);
   },
-  [types.UPDATETODO](state, todo) {
-    if(todo.text) {
-      state.todos[todo.uuid].text = todo.text;
-    }
-    state.todos[todo.uuid].isEdit = false;
+  [types.UPDATETODO](state, payload) {
+    state.todos[payload.index].text = payload.content;
+    state.todos[payload.index].isEdit = false;
   },
   [types.EDITTODO](state, todo){
-  	state.todos[todo.uuid].isEdit = true;
+    state.todos[todo.uuid].isEdit = true;
   },
-  [types.UPDATESTATUS](state, todo) {
-  	state.todos[todo.uuid].isCompleted = !todo.isCompleted;
+  [types.UPDATESTATUS](state, payload) {
+    state.todos[payload.index].isCompleted = !payload.isDone;
   },
   [types.SETFILTER](state, filter) {
-  	state.filter = filter;
+    state.filter = filter;
   }
 }
