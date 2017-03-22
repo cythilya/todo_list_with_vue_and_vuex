@@ -30,9 +30,14 @@
 ### 在`<input>`上綁定`v-model`，導致在 mutations 以外的地方改變 state
 解法：使用 event handler 或 watch。
 
+### $event.target.value無法傳送到action
+store dispatch & payload -> commit, EX: updateTodo
+
 ### 引入外部css檔案
 - 使用import，例如：`@import "../assets/css/style.scss";`
 - 在`<style>`加上source，例如：`<style src="../assets/css/style.scss"></style>`
+
+## React + Redux 與 Vue + Vuex 的比較
 
 ## 參考資料 / 推薦閱讀
 - [Vuex(英)](https://vuex.vuejs.org/en/)
