@@ -83,5 +83,3 @@ mutation：更新 state (mutations.js)
 - [Bootstrap Vue](https://bootstrap-vue.github.io/docs)
 
 ---
-## 待處理
-- after complete all todos, click tabs and occur errors
