@@ -25,7 +25,3 @@ export const updateStatus = ({ commit }, payload) => {
 export const setFilter = ({ commit }, filter) => {
   commit(types.SETFILTER, filter);
 }
-
-export const changeTodoText = ({ commit }, todo) => {
-	console.log(todo);
-};
