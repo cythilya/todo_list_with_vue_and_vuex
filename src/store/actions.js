@@ -10,18 +10,22 @@ export const deleteTodo = ({ commit }, index) => {
   commit(types.DELETETODO, index);
 }
 
-export const updateTodo = ({ commit }, todo) => {
-  commit(types.UPDATETODO, todo);
+export const updateTodo = ({ commit }, payload) => {
+  commit(types.UPDATETODO, payload);
 }
 
 export const editTodo = ({ commit }, todo) => {
   commit(types.EDITTODO, todo);
 }
 
-export const updateStatus = ({ commit }, todo) => {
-  commit(types.UPDATESTATUS, todo);
+export const updateStatus = ({ commit }, payload) => {
+  commit(types.UPDATESTATUS, payload);
 }
 
 export const setFilter = ({ commit }, filter) => {
   commit(types.SETFILTER, filter);
 }
+
+export const changeTodoText = ({ commit }, todo) => {
+	console.log(todo);
+};
