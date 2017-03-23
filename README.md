@@ -36,9 +36,7 @@
 
 ## 遇到的問題 / 解法
 ### 在`<input>`上綁定`v-model`，導致在 mutation 以外的地方改變 state
-解法：使用 event handler 或 watch。例如，在更新 todo 的文字時，過去都是利用`v-model`雙向綁定的特性改變 model 的值，但在此使用 vuex 統一管理狀態，因此 todo 文字的改變就必須使用 action 發送 commit，交由 mutation 來處理。
-
-備註：在這裡`$event.target.value`無法傳送到 action。必須使用 store 的 dispatch 並用 payload 帶資料來。
+解法：使用 event handler 或 watch。在更新 todo 的文字時，過去都是利用`v-model`雙向綁定的特性來改變資料，但在此使用 vuex 統一管理狀態(即資料)，因此只能經由 action 發送 commit，交由 mutation 來改變資料。
 
 由 method 發送 dispatch (components)
 
@@ -66,6 +64,9 @@ export const updateTodo = ({ commit }, payload) => {
   state.todos[payload.index].text = payload.content;
   state.todos[payload.index].isEdit = false;
 }
+
+備註：在這裡`$event.target.value`無法直接傳送資料到 action，必須在 view 使用 store 的 dispatch 並藉由 payload 帶給 action 和 mutation。
+
 ```
 ### 什麼是 Scoped CSS？
 當`<style>`標籤有 scoped 屬性時，樣式就只能作用於當前的元件。在同一個元件內，可以同時有作用域和無作用域的樣式。
