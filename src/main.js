@@ -4,8 +4,6 @@ import App from './App.vue';
 import TodoList from './components/TodoList.vue';
 import store from './store';
 
-Vue.use(BootstrapVue);
-
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
