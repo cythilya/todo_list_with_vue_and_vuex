@@ -12,7 +12,7 @@
 - 在檢視按鈕上顯示目前全部、已完成和未完成的 todo 數量
 
 ## Demo
-(補圖)
+![Todo List with Vue.js and Vuex](2017-03-23-todo-list-with-vue-and-vuex-demo.gif)
 
 ## 說明
 ### Vue 與 Vuex 的合作流程
