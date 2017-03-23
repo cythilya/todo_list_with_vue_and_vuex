@@ -1,0 +1,34 @@
+.todos {
+  width: 600px;
+  margin: 15px auto;
+  padding: 15px;
+}
+
+.todo-heading {
+  font-size: 30px;
+  margin: 0 0 15px 0;
+}
+
+.todo-list {
+  min-height: 250px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.inactive {
+  background: #0275d8;
+  color: #fff;
+  .badge {
+    background: #fff;
+    color: #000;
+  }
+}
+
+.todo-item {
+  .custom-control {
+    min-height: 1em;
+    padding-left: 1rem;
+  }
+}

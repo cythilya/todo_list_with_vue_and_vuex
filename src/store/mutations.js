@@ -13,7 +13,7 @@ export const state = {
     "a98bf666-a710-43b2-81b2-60c68ec4688d": {
       "uuid": "a98bf666-a710-43b2-81b2-60c68ec4688d",
       "text": "打電話給小明",
-      "isCompleted": true,
+      "isCompleted": false,
       "isEdit": false
     },
     "452ef417-033d-48ff-9fec-9d686c105dce": {
@@ -57,7 +57,7 @@ export const mutations = {
     state.todos[payload.index].text = payload.content;
     state.todos[payload.index].isEdit = false;
   },
-  [types.EDITTODO](state, todo){
+  [types.EDITTODO](state, todo) {
     state.todos[todo.uuid].isEdit = true;
   },
   [types.UPDATESTATUS](state, payload) {

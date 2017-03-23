@@ -20,8 +20,6 @@ export default {
 <style>
 @import "./assets/css/reset-font-min.css";
 @import "./assets/css/clearfix.css";
-
-html {
-  font-family: '微軟正黑體', sans-serif;
-}
+@import "./assets/css/style-base.scss";
+@import "./assets/css/style-helper.scss";
 </style>
