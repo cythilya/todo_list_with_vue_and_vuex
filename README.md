@@ -34,9 +34,6 @@
 - mutations.js：(1) 放至 state 初始值；(2) 接受由 action 傳送過來的資料來更新 state 的地方
 - mutations_type.js：將動作定義成常數的地方
 
-### Scoped CSS
-當`<style>`標籤有 scoped 屬性時，樣式就只能作用於當前的元件。在同一個元件內，可以同時有作用域和無作用域的樣式。
-
 ## 遇到的問題 / 解法
 ### 在`<input>`上綁定`v-model`，導致在 mutation 以外的地方改變 state
 解法：使用 event handler 或 watch。例如，在更新 todo 的文字時，過去都是利用`v-model`雙向綁定的特性改變 model 的值，但在此使用 vuex 統一管理狀態，因此 todo 文字的改變就必須使用 action 發送 commit，交由 mutation 來處理。
@@ -70,7 +67,10 @@ export const updateTodo = ({ commit }, payload) => {
   state.todos[payload.index].isEdit = false;
 }
 ```
-### 引入外部樣式檔案
+### 什麼是 Scoped CSS？
+當`<style>`標籤有 scoped 屬性時，樣式就只能作用於當前的元件。在同一個元件內，可以同時有作用域和無作用域的樣式。
+
+### 如何引入外部樣式檔案？
 解法
 
 - 使用import，例如：`@import "../assets/css/style.scss";`
