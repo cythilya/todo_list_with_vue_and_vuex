@@ -15,15 +15,24 @@
 ![Todo List with Vue.js and Vuex](2017-03-23-todo-list-with-vue-and-vuex-demo.gif)
 
 ## 說明
-### Vue 與 Vuex 的合作流程
+主要使用 Vue、Vuex 和 [Bootstrap Vue](https://bootstrap-vue.github.io/docs)。
+
 使用者與 view 互動，發送 dispatch (.vue) -> 產生 action，藉由 action 發送 commit (actions.js) -> 改變 state (mutations.js) -> 更新 view (.vue)。
 
 ### Vuex 的工作劃分
-- components：單純 view 的展示，使用者與 view 互動。
-- getter.js：取得 view 所需的資料。
-- actions.js：要執行的動作，發送 commit 以做後續處理。
-- mutations.js：更新 state 的地方。
-- mutations_type.js：將動作定義成常數的地方。
+
+檔案結構如下
+
+![Todo List with Vue.js and Vuex](2017-03-23-todo-list-app-structure.png)
+
+主要分為
+
+- assets：放靜態檔案的地方，例如：樣式(scss/css)、圖檔
+- components：元件，畫面要顯示部份會放在這裡
+- getter.js：取得 view 所需的資料，例如：todo list、目前全部、已完成和未完成的 todo 數量
+- actions.js：要執行的動作，發送 commit (含資料) 以做後續處理
+- mutations.js：(1) 放至 state 初始值；(2) 接受由 action 傳送過來的資料來更新 state 的地方
+- mutations_type.js：將動作定義成常數的地方
 
 ### Scoped CSS
 當`<style>`標籤有 scoped 屬性時，樣式就只能作用於當前的元件。在同一個元件內，可以同時有作用域和無作用域的樣式。
