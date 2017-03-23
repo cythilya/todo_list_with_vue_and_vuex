@@ -1,8 +1,12 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import store from './store';
 import App from './App.vue';
 import TodoList from './components/TodoList.vue';
-import store from './store';
+import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue'; //bootstrap
+
+Vue.use(VueRouter);
+Vue.use(BootstrapVue);
 
 const router = new VueRouter({
   mode: 'history',
