@@ -23,10 +23,7 @@
 3. 在 mutation 改變 state
 4. 更新畫面
 
-### Vuex 的工作劃分
-
-檔案結構如下
-
+### 檔案結構
 ![Todo List with Vue.js and Vuex](2017-03-23-todo-list-app-structure.png)
 
 主要分為
