@@ -66,7 +66,6 @@ export const updateTodo = ({ commit }, payload) => {
 [types.UPDATETODO](state, payload) {
   state.todos[payload.index].text = payload.content;
 }
-
 ```
 
 備註：在這裡`$event.target.value`無法直接傳送資料到 action，必須在 view 使用 `$store.dispatch`，並將資料由 payload 帶給 action 和 mutation。
