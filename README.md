@@ -29,7 +29,7 @@
 主要分為
 
 - assets：放靜態檔案的地方，例如：樣式(scss/css)、圖檔
-- components：元件，畫面要顯示部份會放在這裡，例如：HTML、(Scoped) CSS、和一些 JS。將從 getter 取得的資料帶畫面，或將使用者輸入的資料對應至 action 或由此發出 dispatch 至 action。
+- components：元件，畫面要顯示部份會放在這裡，例如：HTML、(Scoped) CSS、和一些 JS。將從 getter 取得的資料帶到畫面，或將使用者輸入的資料對應至 action 或由此發出 dispatch 至 action。
 - getter.js：取得 view 所需的資料，例如：todo list、目前全部、已完成和未完成的 todo 數量。
 - actions.js：要執行的動作，接受使用者與畫面的互動所產生的資料，發送 commit 至 mutation 以做後續處理。
 - mutations.js：(1) 放至 state 初始值；(2) 處理由 action 傳過來的資料來更新 state。
