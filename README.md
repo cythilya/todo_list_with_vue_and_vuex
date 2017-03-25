@@ -17,6 +17,7 @@
 ## 說明
 主要使用 Vue、Vuex 和 [Bootstrap Vue](https://bootstrap-vue.github.io/docs)。
 
+### 程式流程
 使用者與 view 互動，發送 dispatch (.vue) -> 產生 action，藉由 action 發送 commit (actions.js) -> 改變 state (mutations.js) -> 更新 view (.vue)。
 
 ### Vuex 的工作劃分
