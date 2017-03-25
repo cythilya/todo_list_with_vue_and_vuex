@@ -41,7 +41,7 @@
 
 在更新 todo 的文字時，過去都是利用`v-model`雙向綁定的特性來改變資料，但在此使用 vuex 統一管理狀態，因此只能經由 action 發送 commit，交由 mutation 來改變資料。
 
-由 method 發送 dispatch (components)
+當使用者編輯 todo 文字，按下 enter 鍵結束編輯狀態後，將 todo 的 ID 和使用者輸入的字串包成一個 object，由 method 發送 dispatch (components/TodoList.vue)給 action。
 
 ```javascript
 updateTodo: function(index, content) {
