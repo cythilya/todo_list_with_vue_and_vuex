@@ -52,7 +52,7 @@ updateTodo: function(index, content) {
 }
 ```
 
-由 action 發送 commit (actions.js)
+由 action 發送 commit (actions.js) 至 mutation，其中將得到的資料包成 payload 也一起送過去。
 
 ```javascript
 export const updateTodo = ({ commit }, payload) => {
@@ -65,7 +65,6 @@ export const updateTodo = ({ commit }, payload) => {
 ```javascript
 [types.UPDATETODO](state, payload) {
   state.todos[payload.index].text = payload.content;
-  state.todos[payload.index].isEdit = false;
 }
 
 備註：在這裡`$event.target.value`無法直接傳送資料到 action，必須在 view 使用 store 的 dispatch 並藉由 payload 帶給 action 和 mutation。
