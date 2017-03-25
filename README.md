@@ -67,9 +67,10 @@ export const updateTodo = ({ commit }, payload) => {
   state.todos[payload.index].text = payload.content;
 }
 
+```
+
 備註：在這裡`$event.target.value`無法直接傳送資料到 action，必須在 view 使用 store 的 dispatch 並藉由 payload 帶給 action 和 mutation。
 
-```
 ### 什麼是 Scoped CSS？
 當`<style>`標籤有 scoped 屬性時，樣式就只能作用於當前的元件。在同一個元件內，可以同時有作用域和無作用域的樣式。
 
