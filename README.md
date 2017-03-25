@@ -39,7 +39,7 @@
 ### 在`<input>`上綁定`v-model`，導致在 mutation 以外的地方改變 state
 解法：使用 event handler 或 watch。
 
-在更新 todo 的文字時，過去都是利用`v-model`雙向綁定的特性來改變資料，但在此使用 vuex 統一管理狀態(即資料)，因此只能經由 action 發送 commit，交由 mutation 來改變資料。
+在更新 todo 的文字時，過去都是利用`v-model`雙向綁定的特性來改變資料，但在此使用 vuex 統一管理狀態，因此只能經由 action 發送 commit，交由 mutation 來改變資料。
 
 由 method 發送 dispatch (components)
 
