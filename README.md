@@ -1,6 +1,8 @@
 # Todo List with Vue.js and Vuex
 利用 Vue.js 與 Vuex 實作一個 Todo List。
 
+([網誌版](https://cythilya.github.io/2017/03/25/todo-list-with-vue-and-vuex/))
+
 ## 功能介紹
 實作的功能有
 
